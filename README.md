@@ -12,6 +12,11 @@ Copy config.example.py to config.py
 Request an API-key from tmdb.
 Enter your list-id into the config
 
+## Usage
+
+Just call `run.py` if the output is too verbose or you want more, tune the parameters inside run.py. Sorry not super user-friendly.
+This program makes heavy use of caching. If you feel the cache needs to be refreshed you can remove `/tmp/tmdb3.cache` and all `*.cache` files
+in this directory.
 
 ## Example Output
 ```
