@@ -1,6 +1,5 @@
 #!/usr/bin/python2
 # -*- coding: utf-8 -*-
-#import tmdbsimple as tmdb
 # todo look at this: https://github.com/AnthonyBloomer/tmdbv3api
 from __future__ import print_function
 import re
