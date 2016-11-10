@@ -73,7 +73,7 @@ class Request(urllib2.Request):
 
         urllib2.Request.__init__(self, url)
         self.add_header('Accept', 'application/json')
-        self.lifetime = 3600  # 1hr
+        self.lifetime = 360000  # 1hr
 
     def new(self, **kwargs):
         """

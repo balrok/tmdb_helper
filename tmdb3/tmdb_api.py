@@ -67,24 +67,34 @@ __version__ = "v0.7.2"
 #        Fix unicode issues with search result object names
 #        Temporary fix for youtube videos with malformed URLs
 
-from request import set_key, Request
+#ifndef .
+from .request import Request
+from .util import Datapoint, Datalist, Datadict, Element, NameRepr, SearchRepr
+from .pager import PagedRequest
+from .locales import get_locale
+from .tmdb_auth import get_session
+from .tmdb_exceptions import TMDBImageSizeError, TMDBError
+#else
+from request import Request
 from util import Datapoint, Datalist, Datadict, Element, NameRepr, SearchRepr
 from pager import PagedRequest
-from locales import get_locale, set_locale
-from tmdb_auth import get_session, set_session
-from tmdb_exceptions import *
-
-import json
-import urllib
-import urllib2
+from locales import get_locale
+from tmdb_auth import get_session
+from tmdb_exceptions import TMDBImageSizeError, TMDBError
+#endif
 import datetime
 
 DEBUG = False
 
 
 def process_date(datestr):
+    d = [int(x) for x in datestr.split('-')]
+    if len(d) <3:
+        d.append(1)
+    if len(d) <3:
+        d.append(1)
     try:
-        return datetime.date(*[int(x) for x in datestr.split('-')])
+        return datetime.date(*d)
     except (TypeError, ValueError):
         import sys
         import warnings
@@ -332,6 +342,9 @@ class Person(Element):
                         raw=False, default=None)
     adult = Datapoint('adult')
     aliases = Datalist('also_known_as')
+    imdb_id = Datapoint('imdb_id')
+    gender = Datapoint('gender')
+    popularity = Datapoint('popularity')
 
     def __repr__(self):
         return u"<{0.__class__.__name__} '{0.name}'>"\
@@ -416,7 +429,7 @@ class AppleTrailer(Element):
         if size is None:
             # sort assuming ###p format for now, take largest resolution
             size = str(sorted(
-                        [int(size[:-1]) for size in self.sources]
+                        [int(s[:-1]) for s in self.sources]
                         )[-1]) + 'p'
         return self.sources[size].source
 

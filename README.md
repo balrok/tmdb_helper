@@ -38,3 +38,11 @@ Movie has a problem:
     * no genre
     * no imdb
 ```
+
+## Why is tmdb3 bundled?
+
+The code is not developed anymore and small things did not work - see in the commit 971b3f844a7b20636e75ba44db0d05f4d92cf775
+
+## Contributing
+
+Please write an email if you want to work on this code and I'll add you to the developers.
